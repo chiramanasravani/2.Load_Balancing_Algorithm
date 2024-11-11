@@ -1,0 +1,29 @@
+> git
+
+> cls
+
+> git init
+
+> git status
+
+> git add "filename" ("to add single files")
+
+> git status
+
+> git add . ("to add all files")
+
+> git status
+
+> git commit -m "first commit"
+> git branch -M main
+> git remote add origin https://github.com/SravaniChiramana/demo.git
+> git push -u origin main
+
+ if Error:(rejected)
+
+> git fetch origin main:tmp
+
+> git rebase tmp
+
+> git push -u origin main
+

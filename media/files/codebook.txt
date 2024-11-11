@@ -1,0 +1,9 @@
+Code Book is a software development company in Hyderabad, India. That provide 
+custom software & mobile apps development services.
+
+
+ Codebook.in, Hyderabad — Python Fullstack Developer, Intern, 02/2022 to 08/2022
+• Should create websites from scratch using frontend technologies and power those 
+websites with Django framework using python language.
+• Need to maintain data on WampServer.
+• Worked on server-side validations and client-side validations for those websit

@@ -1,0 +1,372 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <!-- Basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">   
+   
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+     <!-- Site Metas -->
+    <title>LBA</title>  
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Site Icons -->
+    <link rel="shortcut icon" href="{% static 'main/images/favicon.ico' %}" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="{% static 'main/images/apple-touch-icon.png' %}">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'main/css/bootstrap.min.css' %}">
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="{% static 'main/style.css' %}">
+    <!-- ALL VERSION CSS -->
+       <!-- ALL VERSION CSS -->
+       <link rel="stylesheet" href="{% static 'main/css/versions.css' %}">
+       <!-- Responsive CSS -->
+       <link rel="stylesheet" href="{% static 'main/css/responsive.css' %}">
+       <!-- Custom CSS -->
+       <link rel="stylesheet" href="{% static 'main/css/custom.css' %}">
+   
+       <!-- Modernizer for Portfolio -->
+       <script src="{% static 'main/js/modernizer.js' %}"></script>
+
+       <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+       <script type="text/javascript">
+        function regvalidation(){
+            var user_name = document.myform.user_name
+            var email = document.myform.email
+            var mailformat = /^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/;
+            var password = document.myform.password
+            var mobile = document.myform.mobile
+            var dob = document.myform.dob
+            var user_image = document.myform.user_image
+            var location = document.myform.location
+            if (user_name.value=='' || user_name.value.length <4){
+                alert("  Username cant' be block" )
+                return false;
+            }
+            if (!email.value.match(mailformat)){
+                alert("invalid email")
+                email.focus();
+                return false;
+               } 
+            if (password.value==''){
+                alert("password should not be empty")
+                password.focus();
+                return false;
+               }
+            
+
+            if (mobile.value=='' || mobile.value.length !=10 ){
+                alert("Mobile number should be 10 digits")
+                mobile.focus();
+                return false;
+               }
+           
+            if (dob.value==''){
+                alert("password should not be empty")
+                dob.focus();
+                return false;
+               }
+
+            if (location.value==''){
+                alert("location should not be empty")
+                location.focus();
+                return false;
+                }
+            
+            if (user_image.value==''){
+                alert("image should not be empty")
+                user_image.focus();
+                  return false;
+                 }
+
+            else{
+               return true;
+            }
+        }
+    </script>
+</head>
+<body class="host_version"> 
+
+	<!-- Modal -->
+	<div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header tit-up">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Customer Login</h4>
+			</div>
+			<div class="modal-body customer-box">
+				<!-- Nav tabs -->
+				<ul class="nav nav-tabs">
+					<li><a class="active" href="#Login" data-toggle="tab">Login</a></li>
+					<li><a href="#Registration" data-toggle="tab">Registration</a></li>
+				</ul>
+				<!-- Tab panes -->
+				
+			</div>
+		</div>
+	  </div>
+	</div>
+
+    <!-- LOADER -->
+	<div id="preloader">
+		<div class="loader-container">
+			<div class="progress-br float shadow">
+				<div class="progress__item"></div>
+			</div>
+		</div>
+	</div>
+	<!-- END LOADER -->	
+	<!-- Start header -->
+	<header class="top-navbar">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="index.html">
+                    <img style="width:70px; height:70px;" src="{% static 'main/icons/server.png' %}"  alt="" />
+                </a>
+                <h1 style="color:orange">Load Balancing Algorithm</h1>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars-host" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbars-host">
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item "><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+						<li class="nav-item active"><a class="nav-link" href="{% url 'user_login' %}">User</a></li>
+						<!-- <li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Course </a>
+							<div class="dropdown-menu" aria-labelledby="dropdown-a">
+								<a class="dropdown-item" href="course-grid-2.html">Course Grid 2 </a>
+								<a class="dropdown-item" href="course-grid-3.html">Course Grid 3 </a>
+								<a class="dropdown-item" href="course-grid-4.html">Course Grid 4 </a>
+							</div>
+						</li> -->
+						<!-- <li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Blog </a>
+							<div class="dropdown-menu" aria-labelledby="dropdown-a">
+								<a class="dropdown-item" href="blog.html">Blog </a>
+								<a class="dropdown-item" href="blog-single.html">Blog single </a>
+							</div>
+						</li> -->
+						<li class="nav-item"><a class="nav-link" href="{% url 'scheduler_login' %}">Task Scheduler</a></li>
+						<li class="nav-item"><a class="nav-link" href="{% url 'cloud_login' %}">Cloud</a></li>
+						
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+                        <li><a class="hover-btn-new log orange" href="{% url 'user_login' %}" ><span>Get Start</span></a></li>
+                    </ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+	<!-- End header -->
+    <div class="all-title-box">
+		<div class="container text-center animated slideInDown">
+			<h1>User Register<span class="m_1"></span></h1>
+            <!-- <hr class=" mx-auto mt-0" style="width: 90px;">
+                <div class=" justify-content-center">
+                    <h5 class=""><a class="text-warning" href="#">Home/Owner/Owner</a></h5>
+                </div> -->
+           
+		</div>
+	</div>
+	<br><br>
+<div  class="justify-content-center">
+<div class="container-fluid ">
+
+    <div class="row justify-content-center wow fadeInUp" data-wow-delay="0.2s " >
+        <div class="col-xl-6 col-md-12 col-sm-12">
+           
+            <div class="contact_form" style="background-color:#4c5a7d">
+                <center>
+                    <h1 class="text-warning mb-3"><ins>User Register</ins></h1>
+                </center>
+
+                <form class="contact-form" method ="post" enctype="multipart/form-data" name="myform" onsubmit="return regvalidation()"> 
+
+                    {% csrf_token %}
+                    
+                    {% if messages %}              
+                    {% for message in messages %}
+                      {% if message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
+                          <script>swal({
+                            title: "",
+                            text: "{{message}}",
+                            icon: "warning",
+                            button: "OK",
+                          });
+                        </script>
+                        
+                      {% elif message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+                          <script>swal({
+                            title: "Success :)",
+                            text: "{{message}}",
+                            icon: "success",
+                            button: "OK",
+                          });
+                        </script>
+                      {% endif %}              
+                    {% endfor %} 
+                  {% endif %}
+                   
+                    <div class="row row-fluid justify-content-center">
+                        <div class="col-lg-8 col-md-6 col-sm-6">
+                            <input type="text" name="user_name" class="form-control" placeholder="Your Name" >
+                        </div>
+                    </div>
+
+                    <div class="row row-fluid justify-content-center">
+                        <div class="col-lg-8 col-md-6 col-sm-6">
+                            <input type="email" name="email" class="form-control" placeholder="Your Email" >
+                        </div>
+                    </div>
+                    <div class="row row-fluid justify-content-center">
+                        <div class="col-lg-8 col-md-6 col-sm-6">
+                            <input type="password" name="password"  class="form-control" placeholder="Password" >
+                        </div>
+                    </div>
+
+
+                    <div class="row row-fluid justify-content-center">
+                        <div class="col-lg-8 col-md-6 col-sm-6">
+                            <input type="tel" name="mobile" class="form-control" placeholder="Mobile Number" >
+                        </div>
+                    </div>
+                    <div class="row row-fluid justify-content-center">
+                        <div class="col-lg-8 col-md-6 col-sm-6">
+                            <input type="date" name="dob"  class="form-control" placeholder="Date of Birth" >
+                        </div>
+                    </div>
+
+
+                    <div class="row row-fluid justify-content-center">
+                        <div class="col-lg-8 col-md-6 col-sm-6">
+                            <input type="text" name="location" class="form-control" placeholder="Location" >
+                        </div>
+                    </div>
+                    <div class="row row-fluid justify-content-center">
+                        <div class="col-lg-8 col-md-6 col-sm-6">
+                            <input type="file" name="user_image"  class="form-control" placeholder="Upload File" >
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <!-- <div class="text-center  ">
+                            <a href="/user/user-dashboard.html"><button type="button"  class="btn btn-light btn-radius btn-brd grd1 btn-block " style="width: 150px;">Login</button></a>
+                        </div> -->
+						<div class="text-center pd ">
+                           <button type="submit"  value="SEND" class="btn btn-outline-warning btn-radius" style="width: 150px;"> Register</button></a>
+                        </div>
+                   </div>
+                </form>
+
+               
+            </div>
+        </div><!-- end col -->
+       
+         <!-- <div >
+            <div class="map-box wow fadeInUp" data-wow-delay="0.2s">
+                <img style="width:500px; height:350;" src="/main/images/img-01.jpg">
+               
+            </div>
+        </div>  -->
+    </div>
+
+</div>
+</div>
+
+   <br><br>
+
+   <br><br>
+<!-- footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-xs-12">
+                <div class="widget clearfix">
+                    <div class="widget-title">
+                        <h3>About US</h3>
+                    </div>
+                    <p> Integer rutrum ligula eu dignissim laoreet. Pellentesque venenatis nibh sed tellus faucibus bibendum. Sed fermentum est vitae rhoncus molestie. Cum sociis natoque penatibus et magnis dis montes.</p>   
+                    <div class="footer-right">
+                        <ul class="footer-links-soi">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-github"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+                            <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                        </ul><!-- end links -->
+                    </div>						
+                </div><!-- end clearfix -->
+            </div><!-- end col -->
+
+            <div class="col-lg-4 col-md-4 col-xs-12">
+                <div class="widget clearfix">
+                    <div class="widget-title">
+                        <h3>Information Link</h3>
+                    </div>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Cloud</a></li>
+                        <li><a href="#">User</a></li>
+                    
+                        
+                    </ul><!-- end links -->
+                </div><!-- end clearfix -->
+            </div><!-- end col -->
+            
+            <div class="col-lg-4 col-md-4 col-xs-12">
+                <div class="widget clearfix">
+                    <div class="widget-title">
+                        <h3>Contact Details</h3>
+                    </div>
+
+                    <ul class="footer-links">
+                        <p><i class="fa fa-map-marker-alt me-3"></i>L.B Nagar, Hyderabad</p>
+                        <p><i class="fa fa-phone-alt me-3"></i>Pin Code:500074. T.S.</p>
+                        <p><i class="fa fa-phone-alt me-3"></i>8555887986</p>
+                        <p><i class="fa fa- me-3"></i>info@codebook.in</p>
+                    </ul><!-- end links -->
+                </div><!-- end clearfix -->
+            </div><!-- end col -->
+            
+        </div><!-- end row -->
+    </div><!-- end container -->
+</footer><!-- end footer -->
+
+<div class="copyrights">
+    <div class="container">
+        <div class="footer-distributed">
+            <div class="footer-center">                   
+                <p class="footer-company-name">>Copyright © 2022, All rights reserved | <a href="#"></a> Designed & Developed by : <a href="#"> FZ INFOTECH</a></p>
+            </div>
+        </div>
+    </div><!-- end container -->
+</div><!-- end copyrights -->
+
+<a href="#" id="scroll-to-top" class="dmtop global-radius"><i class="fa fa-angle-up"></i></a>
+
+<!-- ALL JS FILES -->
+<script src="{% static 'main/js/all.js' %}"></script>
+<!-- ALL PLUGINS -->
+<script src="{% static 'main/js/custom.js' %}"></script>
+<script src="{% static 'main/js/timeline.min.js' %}"></script>
+<script>
+    timeline(document.querySelectorAll('.timeline'), {
+        forceVerticalMode: 700,
+        mode: 'horizontal',
+        verticalStartPosition: 'left',
+        visibleItems: 4
+    });
+</script>
+</body>
+</html>

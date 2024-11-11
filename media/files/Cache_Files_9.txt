@@ -1,0 +1,4 @@
+windows + R = recent
+windows + R = prefetch
+windows + R = temp
+windows + R = %temp%

@@ -1,0 +1,4 @@
+swal in login page for valid user but not activated
+
+filetype validation in js
+password update

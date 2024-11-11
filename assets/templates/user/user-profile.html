@@ -1,0 +1,421 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <!-- Basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">   
+   
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
+     <!-- Site Metas -->
+    <title>LBA</title>  
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Site Icons -->
+    <link rel="shortcut icon" href="{% static 'main/images/favicon.ico' %}" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="{% static 'main/images/apple-touch-icon.png' %}">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'main/css/bootstrap.min.css' %}">
+    <!-- Site CSS -->
+    <link rel="stylesheet" href="{% static 'main/style.css' %}">
+    <!-- ALL VERSION CSS -->
+       <!-- ALL VERSION CSS -->
+       <link rel="stylesheet" href="{% static 'main/css/versions.css' %}">
+       <!-- Responsive CSS -->
+       <link rel="stylesheet" href="{% static 'main/css/responsive.css' %}">
+       <!-- Custom CSS -->
+       <link rel="stylesheet" href="{% static 'main/css/custom.css' %}">
+   
+       <!-- Modernizer for Portfolio -->
+       <script src="{% static 'main/js/modernizer.js' %}"></script>
+
+	   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+       <script type="text/javascript">
+        function validate(){
+          var user_name = document.myform.user_name
+          var email = document.myform.email
+          var emailpattern = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([com\co\.\in])+$/; // to validate email id
+          var datepattern =  /^\d{4}-\d{2}-\d{2}$/;
+         
+          var password = document.myform.password
+          var mobile = document.myform.contact
+          var dob = document.myform.dob
+        
+        
+        
+          if (user_name.value.length <= 0) {
+            alert("Name can't be blank");
+            user_name.focus();
+            return false;
+            
+          }
+          if (email.value.length <= 0) {
+            alert("Enter your email id");
+            email.focus();
+            return false;
+            
+          }
+          if(!email.value.match(emailpattern)){
+            alert("Invalid Email format"); 
+            email.focus();            
+            return false;
+          }
+         
+          if (password.value.length <= 0) {
+            alert("Enter your password");
+            password.focus();
+            return false;
+            
+          }
+         
+          if (mobile.value.length <= 0) {
+            alert("Enter your mobile number");
+            mobile.focus();
+            return false;
+            
+          }
+          if(isNaN(mobile.value)){
+            alert("Invalid Mobile number");
+            return false;
+          }
+          if(mobile.value.length=="" || contact.value.length!=10){
+            alert("Invalid Mobile number");
+            return false;
+          }
+         
+          if(!dob.value.match(datepattern )){
+            alert("Date pattern incorrect, it should match the following pattern: YYYY-MM-DD"); 
+            dob.focus();            
+            return false;
+         }
+          if(dob.value.length <= 0) {
+            alert("Enter your date of birth");
+            dob.focus();
+            return false;
+            
+          }
+
+
+          if (location.value.length <= 0) {
+            alert("Location can't be blank");
+            name.focus();
+            return false;
+            
+          }
+
+          if (user_image.value.length == "") {
+            alert("upload  profile image");
+            profile.focus();
+            return false;
+            
+          }
+          
+         
+         
+        
+        }
+      </script>
+</head>
+<body class="host_version"> 
+
+	<!-- Modal -->
+
+    <!-- LOADER -->
+	<div id="preloader">
+		<div class="loader-container">
+			<div class="progress-br float shadow">
+				<div class="progress__item"></div>
+			</div>
+		</div>
+	</div>
+	<!-- END LOADER -->	
+
+
+	
+	{% if messages %}              
+	{% for message in messages %}
+	  {% if message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
+		  <script>swal({
+			title: "Error",
+			text: "{{message}}",
+			icon: "warning",
+			button: "OK",
+		  });
+		</script>
+		
+	  {% elif message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+		  <script>swal({
+			title: "Success :)",
+			text: "{{message}}",
+			icon: "success",
+			button: "OK",
+		  });
+		</script>
+	  {% endif %}              
+	{% endfor %} 
+  {% endif %}
+   
+
+
+    <!-- Start header -->
+	<header class="top-navbar">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="index.html">
+          <img style="width:70px; height:70px;" src="{% static 'main/icons/server.png' %}"  alt="" />
+        </a>
+        <h1 style="color:orange">Load Balancing Algorithm</h1>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars-host" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbars-host">
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item "><a class="nav-link" href="{% url 'user_dashboard' %}">Dashboard</a></li>
+						<li class="nav-item "><a class="nav-link" href="{% url 'user_upload_files' %}">File Upload</a></li>
+						<!-- <li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Course </a>
+							<div class="dropdown-menu" aria-labelledby="dropdown-a">
+								<a class="dropdown-item" href="course-grid-2.html">Course Grid 2 </a>
+								<a class="dropdown-item" href="course-grid-3.html">Course Grid 3 </a>
+								<a class="dropdown-item" href="course-grid-4.html">Course Grid 4 </a>
+							</div>
+						</li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="dropdown-a" data-toggle="dropdown">Blog </a>
+							<div class="dropdown-menu" aria-labelledby="dropdown-a">
+								<a class="dropdown-item" href="blog.html">Blog </a>
+								<a class="dropdown-item" href="blog-single.html">Blog single </a>
+							</div>
+						</li> -->
+						<li class="nav-item"><a class="nav-link" href="{% url 'user_view_files' %}">My Files</a></li>
+						<li class="nav-item active"><a class="nav-link" href="{% url 'user_profile' %}">My Profile</a></li>
+						
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+                        <li><a class="hover-btn-new log orange" type="button" href="{% url 'home' %}"  data-target="#login"><span>Logout</span></a></li>
+                    </ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+	<!-- End header -->
+	
+    <div class="all-title-box">
+		<div class="container text-center animated slideInDown">
+			<h1>User Profile<span class="m_1"></span></h1>
+            <!-- <hr class=" mx-auto mt-0" style="width: 90px;">
+                <div class=" justify-content-center">
+                    <h5 class=""><a class="text-warning" href="#">Home/Owner/Owner</a></h5>
+                </div> -->
+           
+		</div>
+	</div>
+	
+
+    
+       <!-- profile start -->
+
+
+  <div class="container">
+    <div class="row mt-5"  >
+        <div class="col-md-12">
+     <div class="row">
+         
+         <div class="col-xl-4">
+             <!-- Profile picture card-->
+             <div class="card mb-4 mb-xl-0">
+                 <div class="card-header">Profile Picture</div>
+                 <div class="card-body text-center">
+                     <!-- Profile picture image-->
+                     
+                      <!-- Profile picture image-->
+                         
+                      <img class="img-account-profile rounded-circle mb-4" style="height:200px; width:200px;" src="/media/{{data.user_image}}" alt="">
+                      <!-- Profile picture help block-->
+                      <div class="small font-italic text-muted mb-4 "><h3 class="text-warning"><ins>{{data.user_name}}</ins></h3></div>
+                      <!-- Profile picture upload button-->
+                     
+                  </div>
+              </div>
+          </div>
+          <div class="col-xl-8">
+              <!-- Account details card-->
+              <div class="card mb-4">
+                  <div class="card-header">Account Details</div>
+                  <div class="card-body">
+                    <form action="#" method ="post" enctype="multipart/form-data" name="myform" onsubmit="return loginvalidation()">
+
+                        {% csrf_token %}
+                          <!-- Form Group (username)-->
+
+                          {% if messages %}              
+                          {% for message in messages %}
+                            {% if message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
+                                <script>swal({
+                                  title: "Error :",
+                                  text: "{{message}}",
+                                  icon: "warning",
+                                  button: "OK",
+                                });
+                              </script>
+                              
+                            {% elif message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+                                <script>swal({
+                                  title: "Success :)",
+                                  text: "{{message}}",
+                                  icon: "success",
+                                  button: "OK",
+                                });
+                              </script>
+                            {% endif %}              
+                          {% endfor %} 
+                        {% endif %}
+
+                         
+                          
+                          <div class="mb-3">
+                              <label class="small mb-1" for="inputUsername"> Username </label>
+                              <input class="form-control" id="inputUsername" type="text" name='user_name' value={{data.user_name}}>
+                          </div>
+                            
+                          <!-- Form Group (email address)-->
+                          <div class="mb-3">
+                              <label class="small mb-1" for="inputEmailAddress">Email address</label>
+                              <input class="form-control" id="inputEmailAddress" type="email" name='email' value={{data.email}}  ></input>
+                          </div>
+                          <!-- Form Row-->
+                          <div class="mb-3">
+                            <label class="small mb-1" for="inputPhone">Password</label>
+                            <input class="form-control" id="inputPhone" type="password" name='password' value={{data.password}} ></input>
+                        </div>
+                              <!-- Form Group (phone number)-->
+                              <div class="mb-3">
+                                  <label class="small mb-1" for="inputPhone">Phone number</label>
+                                  <input class="form-control" id="inputPhone" type="tel" name='mobile' value={{data.mobile}}>
+                              </div>
+                              <!-- Form Group (birthday)-->
+                              <div class="mb-3">
+                                  <label class="small mb-1" for="inputBirthday">Date of Birth</label>
+                                  <input class="form-control" id="inputBirthday" type="text" name="dob" value={{data.dob | date:'Y-m-d'}}
+                                  
+                                  placeholder="Date of birth">
+                              </div>
+                             
+
+                              <div class="mb-3">
+                                 <label class="small mb-1" for="inputLocation">Location</label>
+                                 <input class="form-control" id="inputLocation" type="text" placeholder="Enter your location" name='location' value={{data.location}}>
+                             </div>
+                        
+                             <input class="btn btn-warning small" name="user_image"  type="file" ></input>
+                         
+                          
+                          <!-- Save changes button-->
+                          <button class="btn btn-warning" href="#" type="submit">Update</button>
+
+                         </div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+<div>
+<!-- /profile end -->
+
+</div><!-- end row -->
+</div><!-- end container -->
+</div><!-- end section -->	
+
+<footer class="footer">
+  <div class="container">
+      <div class="row">
+          <div class="col-lg-4 col-md-4 col-xs-12">
+              <div class="widget clearfix">
+                  <div class="widget-title">
+                      <h3>About US</h3>
+                  </div>
+                  <p> Integer rutrum ligula eu dignissim laoreet. Pellentesque venenatis nibh sed tellus faucibus bibendum. Sed fermentum est vitae rhoncus molestie. Cum sociis natoque penatibus et magnis dis montes.</p>   
+      <div class="footer-right">
+        <ul class="footer-links-soi">
+          <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+          <li><a href="#"><i class="fa fa-github"></i></a></li>
+          <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+          <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+          <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+        </ul><!-- end links -->
+      </div>						
+              </div><!-- end clearfix -->
+          </div><!-- end col -->
+
+  <div class="col-lg-4 col-md-4 col-xs-12">
+              <div class="widget clearfix">
+                  <div class="widget-title">
+                      <h3>Information Link</h3>
+                  </div>
+                  <ul class="footer-links">
+                      <li><a href="#">Home</a></li>
+                      <li><a href="#">About</a></li>
+                      <li><a href="#">Cloud</a></li>
+                      <li><a href="#">User</a></li>
+      
+        
+                  </ul><!-- end links -->
+              </div><!-- end clearfix -->
+          </div><!-- end col -->
+  
+          <div class="col-lg-4 col-md-4 col-xs-12">
+              <div class="widget clearfix">
+                  <div class="widget-title">
+                      <h3>Contact Details</h3>
+                  </div>
+
+                  <ul class="footer-links">
+                      <p><i class="fa fa-map-marker-alt me-3"></i>L.B Nagar, Hyderabad</p>
+                      <p><i class="fa fa-phone-alt me-3"></i>Pin Code:500074. T.S.</p>
+                      <p><i class="fa fa-phone-alt me-3"></i>8555887986</p>
+                      <p><i class="fa fa- me-3"></i>info@codebook.in</p>
+                  </ul><!-- end links -->
+              </div><!-- end clearfix -->
+          </div><!-- end col -->
+  
+      </div><!-- end row -->
+  </div><!-- end container -->
+</footer><!-- end footer -->
+
+<div class="copyrights">
+  <div class="container">
+      <div class="footer-distributed">
+          <div class="footer-center">                   
+              <p class="footer-company-name">>Copyright © 2022, All rights reserved | <a href="#"></a> Designed & Developed by : <a href="#"> FZ INFOTECH</a></p>
+          </div>
+      </div>
+  </div><!-- end container -->
+</div><!-- end copyrights -->
+
+<a href="#" id="scroll-to-top" class="dmtop global-radius"><i class="fa fa-angle-up"></i></a>
+
+<!-- ALL JS FILES -->
+<script src="{% static 'main/js/all.js' %}"></script>
+<!-- ALL PLUGINS -->
+<script src="{% static 'main/js/custom.js' %}"></script>
+<script src="{% static 'main/js/timeline.min.js' %}"></script>
+<script>
+timeline(document.querySelectorAll('.timeline'), {
+forceVerticalMode: 700,
+mode: 'horizontal',
+verticalStartPosition: 'left',
+visibleItems: 4
+});
+</script>
+</body>
+</html>

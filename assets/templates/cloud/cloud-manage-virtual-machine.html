@@ -1,0 +1,353 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title></title>
+    <link rel="stylesheet" href="{% static 'cloud/vendors/mdi/css/materialdesignicons.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'cloud/vendors/flag-icon-css/css/flag-icon.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'cloud/vendors/css/vendor.bundle.base.css' %}" />
+    <link rel="stylesheet" href="{% static 'cloud/vendors/font-awesome/css/font-awesome.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'cloud/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'cloud/css/style.css' %}" />
+    <link rel="shortcut icon" href="{% static 'cloud/images/favicon.png' %}" />
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  </head>
+  <body>
+    <div class="container-scroller">
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <div class="text-center sidebar-brand-wrapper d-flex align-items-center mb-1" >
+          <a style="text-decoration:none;" class="sidebar-brand brand-logo" href="{% static 'cloud_dashboard' %}"><h3></h3></a>
+         
+        </div>
+        <ul class="nav">
+          <li class="nav-item nav-profile">
+            <a href="#" class="nav-link">
+              <div class="nav-profile-image mb-5">
+                <img style="width:50px; height:50px;" src="{% static 'cloud/faces/face1.jpg' %}" alt="profile" />
+                <span class="login-status online"></span>
+                <!--change to offline or busy as needed-->
+              </div>
+              <div class="nav-profile-text d-flex flex-column pr-3">
+                <span class="font-weight-medium mb-2">Administrator</span>
+              
+              </div>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'cloud_dashboard' %}">
+             <img style="height:25px;width:25px;" class="mr-2" src="{% static 'cloud/icon/dashboard (1).png' %}">
+              <span class="menu-title">Dashboard</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'cloud_add_virtual_machine' %}">
+              <img style="height:25px;width:25px;" class="mr-2" src="{% static 'main/icons/chip.png' %}">
+              <span class="menu-title">add virtual Machine</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'cloud_manage_virtual_machine' %}">
+              <img style="height:25px;width:25px;" class="mr-2" src="{% static 'cloud/icon/accept.png' %}">
+              <span class="menu-title">Manage Virtual Machine</span>
+            </a>
+          </li>
+
+        
+
+          
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'cloud_task_scheduling_details' %}">
+              <img style="height:25px;width:25px;" class="mr-2" src="{% static 'cloud/icon/report.png' %}">
+              <span class="menu-title">Task Scheduling Details</span>
+            </a>
+          </li>
+
+           
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'cloud_load_balancer' %}">
+              <img style="height:25px;width:25px;" class="mr-2" src="{% static 'main/icons/database.png' %}">
+              <span class="menu-title">Load Balancer</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'cloud_makespan' %}">
+              <img style="height:25px;width:25px;" class="mr-2" src="{% static 'main/icons/diagram.png' %}">
+              <span class="menu-title">Makespan</span>
+            </a>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link" href="/admin/admin-view-feedback.html">
+              <img style="height:15px;width:15px;" class="mr-2" src="/user/icon/feedback (1).png">
+              <span class="menu-title">Feedbacks</span>
+            </a>
+          </li> -->
+        </ul>
+      </nav>
+      <div class="container-fluid page-body-wrapper">
+        <div id="theme-settings" class="settings-panel">
+          <i class="settings-close mdi mdi-close"></i>
+          <p class="settings-heading">SIDEBAR SKINS</p>
+          <div class="sidebar-bg-options selected" id="sidebar-default-theme">
+            <div class="img-ss rounded-circle bg-light border mr-3"></div> Default
+          </div>
+          <div class="sidebar-bg-options" id="sidebar-dark-theme">
+            <div class="img-ss rounded-circle bg-dark border mr-3"></div> Dark
+          </div>
+          <p class="settings-heading mt-2">HEADER SKINS</p>
+          <div class="color-tiles mx-0 px-4">
+            <div class="tiles light"></div>
+            <div class="tiles dark"></div>
+          </div>
+        </div>
+        <nav class="navbar col-lg-12 col-12 p-lg-0 fixed-top d-flex flex-row">
+          <div class="navbar-menu-wrapper d-flex align-items-stretch justify-content-between">
+            <a class="navbar-brand brand-logo-mini align-self-center d-lg-none" href="{% url 'home' %}"><img src="{% static 'cloud/images/logo-mini.svg' %}" alt="logo" /></a>
+            <button class="navbar-toggler navbar-toggler align-self-center mr-2" type="button" data-toggle="minimize">
+              <i class="mdi mdi-menu"></i>
+            </button>
+          <ul class="navbar-nav">
+           
+            <li class="nav-item nav-search border-0 ml-1 ml-md-3 ml-lg-5 d-none d-md-flex">
+              <form class="nav-link form-inline mt-2 mt-md-0" method="post">
+                {% csrf_token %} 
+                <div class="input-group">
+                  <input type="search" name='search' class="form-control" placeholder="Search" />
+                 
+                  <button class="input-group-append" type="submit" >
+                    <span class="input-group-text">
+                      <i class="mdi mdi-magnify"></i>
+                    </span>
+                  </button>
+                </div>
+              </form>
+            </li>
+          </ul>
+          <ul class="navbar-nav navbar-nav-right ml-lg-auto">
+            <li class="nav-item dropdown d-none d-xl-flex border-0">
+             
+                <i class="mdi mdi-earth"></i> English </a>
+          
+            </li>
+            <li class="nav-item nav-profile dropdown border-0">
+              <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown">
+                <img class="nav-profile-img mr-2" alt="" src="{% static 'cloud/faces/face1.jpg' %}" />
+                <span class="profile-name">Administrator</span>
+              </a>
+              <div class="dropdown-menu navbar-dropdown w-100" aria-labelledby="profileDropdown">
+               
+                <a class="dropdown-item" href="{% url 'home' %} ">
+                  <i class="mdi mdi-logout mr-2 text-primary"></i> Logout </a>
+              </div>
+            </li>
+          </ul>
+          <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+            data-toggle="offcanvas">
+            <span class="mdi mdi-menu"></span>
+          </button>
+        </div>
+      </nav>
+      <div class="main-panel">
+        <div class="content-wrapper pb-0">
+          <div class="page-header flex-wrap">
+            <h3 class="mb-0 text-info">
+            </h3>
+            <div class="d-flex">
+            
+            </div>
+          </div>
+
+
+
+          <!-- main -->
+
+          <div class="content-wrapper pb-0">
+            <div class="page-header flex-wrap">
+
+
+              {% if messages %}              
+              {% for message in messages %}
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
+                    <script>swal({
+                      title: "",
+                      text: "{{message}}",
+                      icon: "warning",
+                      button: "OK",
+                    });
+                  </script>
+                  
+                {% elif message.level == DEFAULT_MESSAGE_LEVELS.INFO %}
+                    <script>swal({
+                      title: "Success :)",
+                      text: "{{message}}",
+                      icon: "success",
+                      button: "OK",
+                    });
+                  </script>
+                {% endif %}              
+              {% endfor %} 
+            {% endif %}
+    
+
+<!-- cards start -->
+
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+
+    {% for h in data %}
+        <div class="col-lg-4 mb-3">
+            <div class="card" style="width: 18rem; background-color:#ffdfd7; padding:15px;">
+
+              {% if h.status == 'ON' %}
+              <h3  style="margin-top:10px; background-color:green; padding:15px; color:white">{{h.vm_name}}</h3>
+                                  {% endif %}
+
+                                  {% if h.status == 'OFF' %}
+              <h3  style="margin-top:10px; background-color:red; padding:15px; color:white">{{h.vm_name}}</h3>
+                                  {% endif %}
+                
+  
+                    <div class="card-body ">
+                      <div class="pricing-table-space"></div>
+                                  <div class="pricing-table-features">
+                                      {% comment %} <p><i class="fa fa-envelope-o"></i> <strong>250</strong> Email Addresses</p> {% endcomment %}
+
+                                      <p><i class="fa fa-link"></i> <strong class="mx-3">Storage Type</strong >{{h.storage_type}}</p>
+                                      <p><i class="fa fa-rocket"></i> <strong class="mx-3">Storage</strong>:{{h.storage}}</p>
+                                      <p><i class="fa fa-life-ring"></i> <strong class="mx-3">OS</strong>:{{h.os}}</p>
+                                      
+                                      <p><i class="fa fa-database"></i> <strong class="mx-3">CPU</strong >:{{h.cpu}}</p>
+                                      <p><i class="fa fa-link"></i> <strong class="mx-3">RAM</strong >{{h.ram}}</p>
+                                      {% comment %} <p><i class="fa fa-life-ring"></i> <strong>24/7 Unlimited</strong> Support</p> {% endcomment %}
+
+                                      
+                                  </div>
+                                 {% comment %} <form method="post">
+                                  {% csrf_token %}
+                                  <div class="form-check">
+                                    <input class="form-check-input" type="radio" style="width:20px; height:20px" name="radio" id="exampleRadios1" value="option1" checked>
+                                    <label class="form-check-label" for="exampleRadios1">
+                                     On
+                                    </label>
+                                  </div>
+                                  </form> {% endcomment %}
+
+
+                                  {% comment %} {% if u.status == 'Accepted' %} {% endcomment %}
+
+                                  <a href="/cloud-on-status/{{h.vm_id}}" class="badge badge-inverse-success mb-2" style="width:40px"> ON </a>
+                                  <a href="/cloud-off-status/{{h.vm_id}}" class="badge badge-inverse-danger mb-2 " style="width:40px"> OFF </a>
+                                  
+
+
+                                  {% if h.status == 'Pending' %}
+                                  <div class="badge badge-inverse-warning mx-4 mb-2 "> Pending</div>
+                                  {% endif %}
+    
+                                  {% if h.status == 'ON' %}
+                                  <div class="badge badge-inverse-warning mx-4 mb-2"> ON </div>
+                                  {% endif %}
+    
+                                  {% if h.status == 'OFF' %}
+                                  <div class="badge badge-inverse-warning mx-4 mb-2"> OFF </div>
+                                {% endif %}
+
+                                {% comment %} <div class="form-check">
+                                  <a href="">
+                                  <a href="" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                                  <label class="form-check-label" for="exampleRadios1"></a>
+                               
+                                  </label>
+                                </div> {% endcomment %}
+
+                                  
+                                 
+    
+                                  {% comment %} {% if u.status == 'Pending' %} {% endcomment %}
+                                  {% comment %} <a href="/accept_owner/{{u.owner_id}}" class="badge badge-inverse-success"> Accept </a>
+                                  <a href="/reject_owner/{{u.owner_id}}" class="badge badge-inverse-danger"> Reject </a> {% endcomment %}
+                                  {% comment %} {% endif %} {% endcomment %}
+
+                        <a href="cloud-edit-virtual-machine/{{h.vm_id}}"
+                        class="btn btn-primary w-100 col-lg-12" type="submit">Edit</a>
+                    </div>
+                
+            </div>
+        </div>
+        {% endfor %}
+
+
+      </div>
+       
+    </div>
+  
+  </div>
+  </div>
+  
+  <!-- /cards end -->
+
+
+  
+
+
+
+
+        <!-- main -->
+
+
+        <footer class="footer">
+
+        </footer>
+      </div>
+
+
+
+      <!-- main -->
+
+
+
+      <!-- footer -->
+      <footer class="footer">
+        <div class="d-sm-flex justify-content-center justify-content-sm-between">
+          <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © 2022, All rights
+            reserved | </span>
+          <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> <a
+              href="https://www.bootstrapdash.com/" target="_blank"></a>Designed & Developed by FZ INFOTECH</span>
+        </div>
+      </footer>
+    </div>
+    <!-- main-panel ends -->
+  </div>
+  <!-- page-body-wrapper ends -->
+</div>
+<!-- container-scroller -->
+<!-- plugins:js -->
+<script src="{% static 'cloud/vendors/js/vendor.bundle.base.js' %}"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page -->
+  <script src="{% static 'cloud/vendors/chart.js/Chart.min.js' %}"></script>
+  <script src="{% static 'cloud/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js' %}"></script>
+  <script src="{% static 'cloud/vendors/flot/jquery.flot.js' %}"></script>
+  <script src="{% static 'cloud/vendors/flot/jquery.flot.resize.js' %}"></script>
+  <script src="{% static 'cloud/vendors/flot/jquery.flot.categories.js' %}"></script>
+  <script src="{% static 'cloud/vendors/flot/jquery.flot.fillbetween.js' %}"></script>
+  <script src="{% static 'cloud/vendors/flot/jquery.flot.stack.js' %}"></script>
+  <script src="{% static 'cloud/flot/jquery.flot.pie.js' %}"></script>
+ 
+  <!-- End plugin js for this page -->
+  <!-- inject:js -->
+  <script src="{% static 'cloud/js/off-canvas.js' %}"></script>
+  <script src="{% static 'cloud/js/hoverable-collapse.js' %}"></script>
+  <script src="{% static 'cloud/js/misc.js' %}"></script>
+  <!-- endinject -->
+  <!-- Custom js for this page -->
+  <script src="{% static 'cloud/js/dashboard.js' %}"></script>
+<!-- End custom js for this page -->
+</body>
+
+</html>
